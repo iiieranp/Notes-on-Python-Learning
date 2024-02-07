@@ -17,4 +17,4 @@
 >[!Caution]
 >Here is just a try.
 
-**Thanks @Stringer07 for your continued support!**:partying_face::partying_face::thought_balloon:
+**Thanks @stringer07 for your continued support!**:partying_face::partying_face::thought_balloon:
