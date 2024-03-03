@@ -1,0 +1,22 @@
+#我什么时候能想清楚这些天才的做法
+def function(coin,num):#List:按index映射最优解 N:输出数目 n：计算数目
+    N=num
+    if num in coin:
+        List[num]=1
+        return 1
+    #elif num>max(coin):错的。#和下面的列表生成式逻辑矛盾。有比num大的coin可以直接忽略（否则for中出现负数，且逐渐减小规模（清晰无关项目））
+    elif List[num]!=0:
+        return List[num]
+    else:
+        for i in [c for c in coin if c<=num]:
+            n=1+function(coin,num-i)
+            if n<N:
+                N=n
+        List[num]=N
+        return N
+    #else:
+       #return 999
+
+coin,num=map(eval,input('coin num = :').split(' '))
+List=[0 for i in range(num+1)]
+print(function(coin,num))
