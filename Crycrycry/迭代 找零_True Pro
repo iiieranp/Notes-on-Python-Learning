@@ -1,4 +1,6 @@
 #我什么时候能想清楚这些天才的做法
+from time import time
+
 def function(coin,num):#List:按index映射最优解 N:输出数目 n：计算数目
     N=num
     if num in coin:
@@ -17,7 +19,10 @@ def function(coin,num):#List:按index映射最优解 N:输出数目 n：计算�
     #else:
        #return 999
 
-coin,num=map(eval,input('coin num = :').split(' '))#[1,5,20] 87 
-List=[0 for i in range(num+1)]
+coin,num=map(eval,input('coin num = :').split(' '))#[1,5,20] 87#和True对比
+start=time()
+List=[0 for i in range(num+1)]#观赏
 print(function(coin,num))
-print(List)#观赏List#算的好快，，
+print(List)
+end=time()
+print('time is:%7.7f'%(end-start))#和True对比
