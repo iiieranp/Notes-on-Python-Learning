@@ -15,9 +15,9 @@ def function(coin,num):
                         N=n
                 List[i]=N#这里也可以tab（吧）
                 print(List)#展示进程
-        return List[num]
-    else:
-        return List[num]
+        #return List[num]
+    #else: #上下都return同样的 写一次就行，，
+    return List[num]
 
 coin,num=map(eval,input('coin num=:').split(' '))
 List=[0 for i in range(num+1)]#[i for i=对应位置的index]：[0,1,2,3,...,num](num+1)#但不生成
