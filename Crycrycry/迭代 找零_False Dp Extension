@@ -1,0 +1,34 @@
+#好绝望感觉智商一览无余 屈指可数
+#dpMakeChange Extension
+#记录路径
+#用list的话，N可以直接等于len(tip(num))
+from time import time
+
+def function(coin,num):
+    if List[num]==0:    
+        for i in range(1,num+1):
+            if i in coin:
+                List[i]=1
+                tip[i]+=[i]
+            else:
+                N=i
+                a=0
+                for j in [c for c in coin if c<i]:
+                    n=1+function(coin,i-j)
+                    if n<N:
+                        N=n
+                        a=i-j #而不是a=j！！j是coin的索引！i-j才是num的索引！！
+                        b=j
+                tip[i]=tip[a]+[j]
+                List[i]=N
+                print(List)#展示进程
+                print(tip)
+    return List[num]
+
+coin,num=map(eval,input('coin num=:').split(' '))
+List=[0 for i in range(num+1)]#[i for i=对应位置的index]：[0,1,2,3,...,num](num+1)#但不生成
+tip=[[] for i in range(num+1)]
+start=time()
+print(function(coin,num))
+end=time()
+print('time=%7.7f'%(end-start))
