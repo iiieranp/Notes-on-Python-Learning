@@ -1,0 +1,34 @@
+#TAT QAQ
+#dpMakeChange Extension
+#记录路径
+#用list的话，N可以直接等于len(tip(num))
+from time import time
+
+def function(coin,num):
+    if List[num]==0:    
+        for i in range(1,num+1):
+            if i in coin:
+                List[i]=1
+                tip[i]+=[i]
+            else:
+                N=i
+                a=0
+                for j in [c for c in coin if c<i]:
+                    n=1+function(coin,i-j)[0]
+                    if n<=N:
+                        N=n
+                        a=function(coin,i-j)[1]###用function返回的结果才正确。因为逻辑和算N是一样的。为什么，我现在不想想呜呜呜呜呜呜
+                        b=j
+                tip[i]=a+[b]
+                List[i]=N
+                print(List)#展示进程
+                print(tip)
+    return [List[num],tip[num]]
+
+coin,num=map(eval,input('coin num=:').split(' '))
+List=[0 for i in range(num+1)]#[i for i=对应位置的index]：[0,1,2,3,...,num](num+1)#但不生成
+tip=[[] for i in range(num+1)]
+start=time()
+print(function(coin,num))
+end=time()
+print('time=%7.7f'%(end-start))
