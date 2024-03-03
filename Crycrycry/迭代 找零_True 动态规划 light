@@ -1,0 +1,20 @@
+#字少版本（老师为什么能想出最简便的表达？？）
+#关键：定义迭代的最小规模的时候，用了①List([0]=0 无论怎样都是＋1，则把num=coin最终迭代到1+fuction(coin,0)上 ②前置条件：c<=i,而非c<i
+from time import*
+
+def function(coin,num):
+    for i in range(num+1):
+        N=i #而非N=num！！
+        for j in [c for c in coin if c<=i]:
+            if List[i-j]+1 < N:
+                N=List[i-j]+1
+        List[i]=N
+        print(List)#展示进程
+    return List[num]
+
+coin,num=map(eval,input('coin,num=').split(' '))
+List=[0]*(num+1)
+start=time()
+print(function(coin,num))
+end=time()
+print('time = ',end-start)
