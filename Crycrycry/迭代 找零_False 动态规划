@@ -1,0 +1,26 @@
+#动态规划 其实和记忆/缓存没有区别吧
+from time import time
+
+def function(coin,num):
+    if List[num]==0:
+        N=num    
+        for i in range(num+1):
+            if i in coin:
+                List[i]=1
+            else:
+                for j in [c for c in coin if c<i]:
+                    n=1+function(coin,i-j)
+                    if n<N:
+                        N=n
+                List[i]=N#这里也可以tab（吧）
+                print(List)#展示进程
+        return List[num]
+    else:
+        return List[num]
+
+coin,num=map(eval,input('coin num=:').split(' '))
+List=[0 for i in range(num+1)]
+start=time()
+print(function(coin,num))
+end=time()
+print('time=%7.7f'%(end-start))
