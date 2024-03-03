@@ -1,0 +1,27 @@
+#动态规划 其实和记忆/缓存没有区别吧
+from time import time
+
+def function(coin,num):
+    #N=num 错误 why
+    if List[num]==0:    
+        for i in range(1,num+1):
+            if i in coin:
+                List[i]=1
+            else:
+                N=num#注意N的定义放需要在哪里
+                for j in [c for c in coin if c<i]:
+                    n=1+function(coin,i-j)
+                    if n<N:
+                        N=n
+                List[i]=N#这里也可以tab（吧）
+                print(List)#展示进程
+        return List[num]
+    else:
+        return List[num]
+
+coin,num=map(eval,input('coin num=:').split(' '))
+List=[0 for i in range(num+1)]#[i for i=对应位置的index]：[0,1,2,3,...,num](num+1)#但不生成
+start=time()
+print(function(coin,num))
+end=time()
+print('time=%7.7f'%(end-start))
