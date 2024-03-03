@@ -1,0 +1,12 @@
+def function(coin,num):#num:总金额 N：输出数目 n：计算数目
+    N=num
+    if num in coin:
+        return 1
+    else:
+        for i in[c for c in coin if c<=num]:#有比num大的coin可以直接忽略（否则for中出现负数）
+            n=1+function(coin,num-i)
+            if n<N:#
+                N=n
+        return N#注意return放在哪个层级
+coin,num=map(eval,input('coin num=:').split(' '))
+print(function(coin,num))
