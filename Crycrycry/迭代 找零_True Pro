@@ -17,6 +17,7 @@ def function(coin,num):#List:按index映射最优解 N:输出数目 n：计算�
     #else:
        #return 999
 
-coin,num=map(eval,input('coin num = :').split(' '))
+coin,num=map(eval,input('coin num = :').split(' '))#[1,5,20] 87 
 List=[0 for i in range(num+1)]
 print(function(coin,num))
+print(List)#观赏List#算的好快，，
