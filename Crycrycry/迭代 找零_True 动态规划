@@ -8,7 +8,7 @@ def function(coin,num):
             if i in coin:
                 List[i]=1
             else:
-                N=num#注意N的定义放需要在哪里
+                N=i#注意N的定义放需要在哪里 #N=num虽然运行正确但是逻辑不准确
                 for j in [c for c in coin if c<i]:
                     n=1+function(coin,i-j)
                     if n<N:
