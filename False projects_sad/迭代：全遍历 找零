@@ -1,0 +1,19 @@
+def function(coin,num):
+    if num in coin:
+        return 1
+    elif num>max(coin):
+        List=[]
+        for i in coin:
+            num-=i
+            n=1+function(coin,num)
+            List.append(n)
+        n=min(List)
+        return n
+    else:
+        return 0
+coin,num=map(eval,input().split(' '))#[1,5,10] 20
+n=0
+function(coin,num)#检查
+print(function(coin,num))#
+print('coin,num=%s,%s'%(str(coin),str(num)))#返回1
+print(List)#！问题
