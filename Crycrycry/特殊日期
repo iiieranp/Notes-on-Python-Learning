@@ -1,0 +1,25 @@
+#2408 特殊日期
+#false!!:是计算日子的个数，而不是符合的年的个数（因为同一年，会有好几个日期符合条件）
+#list_index~hashtable':'
+#x：a,b  y：sam，year z：Sam1，Sam2 x→y→z
+a=[1,2,3,4,5,6,7,8,9,1,2,3] #月份数字和
+b=[31,28,31,30,31,30,31,31,30,31,30,31] #闰年加一个29（2+2+9=13）
+Sam1=[]
+num=0
+for i in range(12):
+    for j in range(1,b[i]+1):
+        sam=a[i]+sum(list(map(int,str(j))))#各个位数之和@@@
+        Sam1.append(sam)
+Sam2=Sam1+[13]
+Year=[]
+for i in range(1900,10000):
+    year=sum(list(map(int,str(i))))
+    if ((i%4==0 and i%100!=0) or i%400==0):
+        if year in Sam2:#闰年计算@@@ #这里再加and year in Sam2 和 在下面加if year in Sam2 是不一样的！ 
+            q=Sam2.count(year)
+            num+=q
+    else:
+        if year in Sam1:
+            q=Sam1.count(year)
+            num+=q
+print('num=%d'%(num))
