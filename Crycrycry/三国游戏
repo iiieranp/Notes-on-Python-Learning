@@ -1,0 +1,79 @@
+#时间复杂度n^2/2
+#全组合
+#想到：！全组合可以用递归来得到！！！
+#zhendeshigaitule
+#又是没理解题目
+def subset(n):
+    if n==1:
+        return[[],[1]] #不能×不建议用集合（可变，但元素不能修改，（且无序），但是可以遍历），不能用元组（完全不可变）
+    else:
+        t=subset(n-1) 
+        #for i in t: #你这有t，遍历对象是t，下面也有，，肯定错
+        for i in subset(n-1):
+            i.append(n)
+            t.append(i) #你遍历时候的操作还用t，，，会无限递归，，请理清思路逻辑关系
+            #print(t) #调试 查看进程
+        return t
+
+n=int(input())
+t1=list(map(int,input().split(' ')))
+t2=list(map(int,input().split(' ')))
+t3=list(map(int,input().split(' ')))
+#a=set() #a={}是创建字典
+#num=0
+#for i in range(1,n): #全组合（小小七行大大智慧我承认我的弱小）
+ #   time=i
+  #  while time!=0: #这个逻辑，，很重要 #多循环多条件镶嵌的时候，用指针，while，if，灵活组合
+   #     time-=1
+    #    b=set()
+     #   for j in range(n): #这里！！不能想当然！！组合，如何组合？？
+      #      b.add(j)
+       #     ##以上为未解部分，，呜呜呜呜
+        #    if len(b)==i:
+         #       c=list(b)
+          #     c=sorted(c)
+           #     c=tuple(c)
+            #    a.add(c)
+             #   print(a)
+              #  b=set()
+    #b.add(j) #集合不能用+=,添加单个元素用add
+    #a.update(b) #添加多个/单个 用update，但是这里不能用update！！（update是把内容当做迭代对象来处理）呜呜呜集合里面不能套集合，只能用另外的方法实现类似集合的性质（即‘清除相同项’）
+num=0
+a=subset(n)
+a.remove([])
+b=[]
+for i in range(n):
+    if i >=1:
+        for j in [x for x in a if len(x)==i]:
+            t=[t1,t2,t3].copy()#6666这一步不是一个简单的赋值语句！而是映射，前面修改了t里面的值的时候，也把t1，t2，t3修改了#注意这一步放在哪里。。。。以及！！！t1，t2，t3已经被改变了，需要一个固定值/另一个变量来代替（可变的那个量）
+            print(t)
+            #print(t1,t2,t3) 
+            for k in j:
+                #print(k)
+                t[0][k-1]=0 #矩阵！t[a][b]表示a行b列 #这里不能写t1[k-1]=0(原因↑)
+                t[1][k-1]=0
+                t[2][k-1]=0
+
+            x=sum(t[0]) #注意这里的xyzsum和哪个for对齐！！不能少一(或者两个！。。。或者三个。。）个tab！！
+            y=sum(t[1])
+            z=sum(t[2]) #同理，这里不能写sum(t3)
+            #print(t)
+            #print(x,y,z)
+    
+            if x+y>z or x+z>y or y+z>x:
+                num+=1
+                b.append(n-i)
+
+
+    else:
+        x=sum(t1) #注意这里的xyzsum和哪个for对齐！！不能少一个tab！！
+        y=sum(t2)
+        z=sum(t3)
+    
+        if x+y>z or x+z>y or y+z>x:
+            num+=1
+            b.append(n)
+c=max(b)
+if num == 0:
+    c=-1
+print(c)      
