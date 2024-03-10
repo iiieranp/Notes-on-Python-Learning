@@ -1,0 +1,46 @@
+#用迭代可以(方便)实现记忆化 #比较与用while的区别
+#三个map：输入的操作指引，记忆，进程
+#进程细节
+import re
+
+def dfs(x,y): #下面用i,j,这里用x,y都一样，xy代表‘参量位置’,ij为'实值'作为参量
+    if x<0 or y<0 or x>=10 or y>=10: #因为步长是1，所以可以直接x=10 or y=10 吧 #先判断（继承了/表示上一步的移动结果），再走
+        for i in range(10) :
+            i1=str(now[i]) #正则表达式替换1为a，放到flag中
+            i2=re.sub(r'1','a',i1)
+            i3=eval(i2)
+            now[i]=i3
+        return 1
+    if now[x][y]==1: #@@@遇到走过的记号，说明兜圈子（@@@唯一走不出去的可能性），返回0
+        for i in range(10) :
+            i1=str(now[i]) #正则表达式替换1为b，放到flag中
+            i2=re.sub(r'1','b',i1)
+            i3=eval(i2) #用eval实现无痛list，str转换！#i2='[0,b,0,0,b,...]'
+            now[i]=i3
+        return 0 #走不出，返回结果是0
+    now[x][y]=1
+    if map[x][y]=="L": #@注意，x,y不能自己定义为'横纵坐标'，x已经确定代表行，即纵坐标，y为列，横坐标
+        return dfs(x,y-1)
+    if map[x][y]=="R":
+        return dfs(x,y+1)
+    if map[x][y]=="U": #注意向上是行数变小
+        return dfs(x-1,y)
+    if map[x][y]=="D":
+        return dfs(x+1,y)
+    
+#操作指引
+map=[[' '*10] for i in range(10)] #初始化迷宫框架
+for i in range(10):
+    map[i]=list(input())
+
+#记忆 a为走出true b为走不出false
+flag=[[0]*10 for k in range(10)] 
+
+#进程
+num=0 #答案1 or 0
+for i in range(10): #方便坐标，所以用两次循环（带了index)创建(进程）
+    for j in range(10):
+        now=[[0]*10 for k in range(10)] #格式：now[x][y] #@@@!!!每一次都是一个新vis！每一次都是一个起点，一条路径，（而不可能有多分支），所以dfs里用1标记路径是没问题的
+        if dfs(i,j)==1: #函数（i，j）；1 or 0 返回
+            num+=1
+print(num)
