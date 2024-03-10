@@ -1,0 +1,35 @@
+import sys
+import os
+
+sys.setrecursionlimit(30000) #@@@递归深度设置
+
+#用简单的表格可以表记忆化
+#shishan fib
+#问题出在哪里QAQ
+def fib(n):
+    global num,#可以不用global data#否则，下方没有return num的话，num无法在函数外被print
+    num+=1
+    if n==1:
+        data[n]=1
+        data[n+1]=1
+        print(data)
+        return data[n]
+    if data[n-1]!=0:
+        if data[n-2]!=0:
+            data[n]=data[n-1]+data[n-2]
+        else:
+            data[n]=data[n-1]+fib(n-2)
+    else:
+        if data[n-2]!=0:
+            data[n]=fib(n-1)+data[n-2]
+        else:
+            data[n]=fib(n-1)+fib(n-2)
+    print(data)
+    return data[n]
+
+n=int(input())
+#data=[]*(n+1)永远是空表格。。
+data=[0]*(n+1)
+num=0
+print(fib(n))
+print(num)
