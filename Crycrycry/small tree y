@@ -1,0 +1,20 @@
+n,m=map(int,input().split(' ')) ##这里没有int的话 错误
+a=[]
+num=[]#num=0 #num的定义不能和found，len一起放下面
+for i in range(n):
+    b=list(map(str,input()))
+    a.append(b) #矩阵
+#print(a)
+    
+for i in range(1,n-1):
+    for j in range(1,m-1):
+        found=1
+        len=1
+        while found==1 and i-len>=0 and j-len>=0 and j+len<=m-1 and i+len<=n-1:
+            if a[i][j]==a[i-len][j-len] and a[i][j]==a[i-len][j+len] and a[i][j]==a[i+len][j]:
+                len+=1
+            else:
+                found=0
+        num.append(len-1)
+        #print(num)
+print(max(num))
