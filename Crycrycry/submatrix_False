@@ -1,0 +1,22 @@
+#子矩阵：选定一个相对位置点（如，左上角元素）
+m,n,a,b=map(int,input().split())
+mp=[]
+for i in range(m):
+    c=list(map(int,input().split(' '))) #map
+    mp.append(c)
+
+Sum=[]
+
+for i in range(m-a+1):
+    for j in range(n-b+1): #选起始点 #四个for的shishan 运行超时@#@#@#
+        now=[]
+        for k in range(a):
+            for z in range(b):
+                ##if mp[i+a][j+b]>now:
+                    #now=mp[i+a][j+b] ？？大纸张！！！！@@@ 报错list' object is not callable的时候不一定是那个位置的问题。（？）
+                #if mp[i+k][j+z]>now:
+                    #now=mp[i+k][j+z] 看错题了。不是让最大值求和
+                now.append(mp[i+k][j+z])
+            Sum.append(max(now)*min(now))
+        
+print(sum(Sum))
