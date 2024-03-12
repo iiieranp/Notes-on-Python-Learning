@@ -11,16 +11,19 @@ for i in range(n):
 
 dp=[[0 for i in range(C+1)] for j in range(n+1)] #dp结果表
 
+print(c,m)
+
 def solve(n,C): #还有什么定义函数的必要，？
     for i in range(1,n+1): #第一行全是0，是初始值，可以先单独设定
         for j in range(C+1): #@@@整个逻辑就是：在这个格子里：当前选项：装了/没装 这个物品 + 之前的所有选项可能集合。
             if m[i][0]>c[j]:
                 dp[i][j]=dp[i-1][j]
-            elif m[i][1]+dp[i][j-m[i][0]]>dp[i-1][j]:
+            elif m[i][1]+dp[i][j-m[i][0]]<dp[i-1][j]:
                 dp[i][j]=dp[i-1][j]
             else:
                 dp[i][j]=m[i][1]+dp[i][j-m[i][0]]
             #elif,else写成：dp[i][j]=max(m[i][1]+dp[i][j-m[i][0],dp[i-1][j]]) #max(1,2,3,4,5,...)
-    return dp[n,C]#注意！！不是n+1，C+1 分清index
+            print(i,j,dp)
+    return dp[n][C]#注意！！不是n+1，C+1 分清index
 
 print(solve(n,C))
