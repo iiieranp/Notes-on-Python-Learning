@@ -1,29 +1,36 @@
-#递归 记忆化(→dfs)
+#recursion递归 记忆化(→dfs)
 #背包
 #(这里)记忆化只用加关键的一句(判断)！类比找零，都是先取最优解了，然后存储，然后下一次先调用
 #n,C:个数，总容量 c[i] w[i]:体积，价值
 
 n,C=map(int,input().split())
-c=[0]
-w=[0]
+c=[0 for i in range(n+1)]
+w=[0 for i in range(n+1)]
+#for i in range(1,n+1):
+    #c[i]=list(map(int,input().split()))[0]
+    #w[i]=list(map(int,input().split()))[1] #？？？？？？？？什么狗屎
 for i in range(1,n+1):
-    c[i]=list(map(int,input().split()))[0]
-    w[i]=list(map(int,input().split()))[1]
+    c[i],w[i]=map(int,input().split())
 
-dp=[[0 for i in range(C+1)] for j in range(n+1)]
+dp=[[0 for i in range(C+1)] for j in range(n+1)] #放一排0一列0可以让index与实际意义index对应
 
 def solve(n,C):
-    if dp[n][C]!=0:
+    if dp[n][C]!=0 or n==0 or C==0:
+        print(dp)
         return dp[n][C] #只有这里，一开始取记忆值/最后放入记忆值时用到dp
     else:
         if c[n]>C:
             dp[n][C]=solve(n-1,C)
-            return dp[n][C]  #什么时候用solve，什么时候用dp[][]，逻辑是，理应是之前算出的值，就用solve（或者dp（×！！！因为你只有用solve，让他去操作，去调用，整个程序才会进行，dp只是用来记重复的迭代中可以少算的值，要记住是从上到下爹待定，必须用函数自身来链接）），必然已经算出的值：dp/solve(不建议)
-        elif dp[n-1][C]>dp[n][C-c[n]]:
-            dp[n][C]=dp[n-1][C]
+            #print(dp)
+            return dp[n][C]  #什么时候用solve，什么时候用dp[][]，逻辑是，理应是之前算出的值，就用solve(如果你想问，已经在dp里算出来了呢？：：solve里面一开始就有判断dp！！)(或者dp(×！！！因为你只有用solve，让他去操作，去调用，整个程序才会进行，dp只是用来记重复的迭代中可以少算的值，要记住是从上到下爹待定，必须用函数自身来链接）），必然已经算出的值：dp/solve(不建议)
+        #elif dp[n-1][C]>dp[n][C-c[n]]: 错了，理由↑
+        elif solve(n-1,C)>solve(n,C-c[n])+w[n]: #别把w[n]漏了。。
+            dp[n][C]=dp[n-1][C] #前面必然算了一次，这里就可以直接用dp
+            #print(dp)
             return dp[n-1][C]
         else:
-            dp[n][C]=dp[n][C-c[n]]
-            return dp[n][C-c[n]] #这四行可以用ifelse连续写一句。
+            dp[n][C]=dp[n][C-c[n]]+w[n]
+            #print(dp)
+            return dp[n][C-c[n]] #这四行可以用ifelse连续写一句
         
 print(solve(n,C))
