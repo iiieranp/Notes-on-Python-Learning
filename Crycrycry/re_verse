@@ -1,0 +1,20 @@
+# 翻转
+#@@@分类讨论！！对失败的情况的讨论！！！
+def solve(a,b):
+    sum=0
+    for i in range(len(a)):
+        if a[i]!=b[i]:
+            if i==0 or i==len(a)-1 or b[i-1]!=b[i+1] or b[i-1]==b[i]: #防止index out of list，把后两个条件放在最后
+                return -1
+            else:
+                sum+=1
+    return sum
+
+n=int(input())
+c=[]
+for i in range(n):
+    a=input()
+    b=input()
+    c.append(solve(a,b))
+for i in range(n):
+    print(c[i])
