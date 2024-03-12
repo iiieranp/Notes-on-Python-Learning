@@ -1,0 +1,26 @@
+#背包，递推 
+#n:物品数 C：总容量（体积） ci：物品体积 wi：物品价值
+
+n,C=map(int,input().split()) #给n可以方便下面循环，否则用for i in sys.stdin
+
+c=[i for i in range(C+1)] #n+1：√ n：× （以状态图第1行，无物品，sum（w）均为0为例）#列
+m=[[0,0]] #行 m[i][0]:体积 m[i][1]：价值 #这个二维表也可以用两个一维代替。n维表都可以这样。
+for i in range(n): 
+    a=list(map(int,input().split()))
+    m.append(a) #m属性表
+
+dp=[[0 for i in range(C+1)] for j in range(n+1)] #dp结果表
+
+def solve(n,C): #还有什么定义函数的必要，？
+    for i in range(1,n+1): #第一行全是0，是初始值，可以先单独设定
+        for j in range(C+1): #@@@整个逻辑就是：在这个格子里：当前选项：装了/没装 这个物品 + 之前的所有选项可能集合。
+            if m[i][0]>c[j]:
+                dp[i][j]=dp[i-1][j]
+            elif m[i][1]+dp[i][j-m[i][0]]>dp[i-1][j]:
+                dp[i][j]=dp[i-1][j]
+            else:
+                dp[i][j]=m[i][1]+dp[i][j-m[i][0]]
+            #elif,else写成：dp[i][j]=max(m[i][1]+dp[i][j-m[i][0],dp[i-1][j]]) #max(1,2,3,4,5,...)
+    return dp[n,C]#注意！！不是n+1，C+1 分清index
+
+print(solve(n,C))
