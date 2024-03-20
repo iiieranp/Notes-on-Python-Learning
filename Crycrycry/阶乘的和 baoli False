@@ -1,0 +1,17 @@
+import math
+#math.factorial(n) n的阶乘
+n=int(input())
+a=list(map(int,input().split(' ')))
+num=0
+for i in a:
+    num+=math.factorial(i)
+#baoli:! 不能通过。
+i=0
+j=0
+end=1
+while i<=num:
+    j+=1
+    i=math.factorial(j)
+    if num%i==0:
+        end=j
+print(end)
