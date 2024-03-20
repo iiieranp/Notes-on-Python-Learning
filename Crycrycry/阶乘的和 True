@@ -1,0 +1,20 @@
+#画图就知道了。超级有道理。乘法分配律，提取公因式。阶乘（之间）如何由此递推，合成。
+n=int(input())
+a=list(map(int,input().split()))
+a.sort()
+from collections import defaultdict
+Map=defaultdict(int)
+
+for i in a:
+  Map[i]+=1
+
+m=a[0]#最开始一定可以合成
+while True:
+  x=Map[m]
+  if x%(m+1)==0:
+    Map[m+1]+=x//(m+1)
+    m+=1
+  else:
+    break
+
+print(m)
